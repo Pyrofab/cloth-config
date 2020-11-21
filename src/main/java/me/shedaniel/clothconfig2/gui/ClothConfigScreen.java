@@ -123,23 +123,6 @@ public class ClothConfigScreen extends AbstractTabbedConfigScreen {
         return super.isEdited();
     }
     
-    /**
-     * Override #isEdited please
-     */
-    @Deprecated
-    public void setEdited(boolean edited) {
-        super.setEdited(edited);
-    }
-    
-    /**
-     * Override #isEdited please
-     */
-    @Override
-    @Deprecated
-    public void setEdited(boolean edited, boolean requiresRestart) {
-        super.setEdited(edited, requiresRestart);
-    }
-    
     @Override
     public void saveAll(boolean openOtherScreens) {
         super.saveAll(openOtherScreens);

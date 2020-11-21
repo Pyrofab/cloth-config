@@ -51,7 +51,6 @@ import java.util.function.Consumer;
 
 public abstract class AbstractConfigScreen extends Screen implements ConfigScreen {
     protected static final Identifier CONFIG_TEX = new Identifier("cloth-config2", "textures/gui/cloth_config.png");
-    private boolean legacyEdited = false;
     private final Identifier backgroundLocation;
     protected boolean legacyRequiresRestart = false;
     protected boolean confirmSave;
@@ -108,7 +107,6 @@ public abstract class AbstractConfigScreen extends Screen implements ConfigScree
     
     @Override
     public boolean isEdited() {
-        if (legacyEdited) return true;
         for (List<AbstractConfigEntry<?>> entries : getCategorizedEntries().values()) {
             for (AbstractConfigEntry<?> entry : entries) {
                 if (entry.isEdited()) {
@@ -166,7 +164,6 @@ public abstract class AbstractConfigScreen extends Screen implements ConfigScree
             for (AbstractConfigEntry<?> entry : entries)
                 entry.save();
         save();
-        setEdited(false);
         if (openOtherScreens) {
             if (isRequiresRestart())
                 AbstractConfigScreen.this.client.openScreen(new ClothRequiresRestartScreen(parent));
