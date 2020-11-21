@@ -1,3 +1,22 @@
+/*
+ * This file is part of Cloth Config.
+ * Copyright (C) 2020 shedaniel
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
 package me.shedaniel.clothconfig2.api;
 
 import me.shedaniel.clothconfig2.gui.AbstractConfigScreen;
@@ -25,12 +44,6 @@ public abstract class AbstractConfigEntry<T> extends DynamicElementListWidget.El
     @Nullable
     private List<ReferenceProvider<?>> referencableEntries = null;
     
-    @Deprecated
-    @ApiStatus.ScheduledForRemoval
-    public final void setReferencableEntries(@Nullable List<AbstractConfigEntry<?>> referencableEntries) {
-        setReferenceProviderEntries(referencableEntries.stream().map(AbstractConfigEntry::provideReferenceEntry).collect(Collectors.toList()));
-    }
-    
     public final void setReferenceProviderEntries(@Nullable List<ReferenceProvider<?>> referencableEntries) {
         this.referencableEntries = referencableEntries;
     }
@@ -45,14 +58,6 @@ public abstract class AbstractConfigEntry<T> extends DynamicElementListWidget.El
     @Override
     public @NotNull AbstractConfigEntry<T> provideReferenceEntry() {
         return this;
-    }
-    
-    @Nullable
-    @ApiStatus.Internal
-    @Deprecated
-    @ApiStatus.ScheduledForRemoval
-    public final List<AbstractConfigEntry<?>> getReferencableEntries() {
-        return referencableEntries.stream().map(ReferenceProvider::provideReferenceEntry).collect(Collectors.toList());
     }
     
     @Nullable
@@ -99,15 +104,6 @@ public abstract class AbstractConfigEntry<T> extends DynamicElementListWidget.El
     }
     
     public abstract Optional<T> getDefaultValue();
-    
-    @Deprecated
-    @ApiStatus.ScheduledForRemoval
-    @Nullable
-    public final ClothConfigScreen getScreen() {
-        if (screen instanceof ClothConfigScreen)
-            return (ClothConfigScreen) screen;
-        return null;
-    }
     
     @Nullable
     public final AbstractConfigScreen getConfigScreen() {
